@@ -95,13 +95,13 @@ class ConfettiShape {
       x: confettiRadius, y: confettiRadius
     }
     this.initialRadius = confettiRadius
-    this.rotationAngle = direction === 'left'  ? generateRandomNumber(0, 0.2, 3) : generateRandomNumber(-0.2, 0, 3)
+    this.rotationAngle = direction === 'down'  ? generateRandomNumber(0, 0.2, 3) : generateRandomNumber(-0.2, 0, 3)
     this.emojiSize = emojiSize
     this.emojiRotationAngle = generateRandomNumber(0, 2 * Math.PI)
 
     this.radiusYUpdateDirection = 'down'
 
-    const angle = direction === 'left'
+    const angle = direction === 'down'
       ? generateRandomNumber(MAX_CONFETTI_ANGLE, MIN_CONFETTI_ANGLE) * Math.PI / 180
       : generateRandomNumber(-MIN_CONFETTI_ANGLE, -MAX_CONFETTI_ANGLE) * Math.PI / 180
 
@@ -111,7 +111,7 @@ class ConfettiShape {
     const positionShift = generateRandomNumber(-MAX_CONFETTI_POSITION_SHIFT, 0)
 
     const shiftedInitialPosition = {
-      x: initialPosition.x + (direction === 'left' ? -positionShift : positionShift) * this.absCos,
+      x: initialPosition.x + (direction === 'down' ? -positionShift : positionShift) * this.absCos,
       y: initialPosition.y - positionShift * this.absSin,
     }
 
@@ -174,7 +174,7 @@ class ConfettiShape {
 
     if (confettiSpeed.x > finalConfettiSpeedX) this.confettiSpeed.x -= dragForceCoefficient * iterationTimeDelta
 
-    this.currentPosition.x += confettiSpeed.x * (direction === 'left' ? -this.absCos : this.absCos) * iterationTimeDelta
+    this.currentPosition.x += confettiSpeed.x * (direction === 'down' ? -this.absCos : this.absCos) * iterationTimeDelta
 
     this.currentPosition.y = (
       this.initialPosition.y
@@ -196,6 +196,7 @@ class ConfettiShape {
     if (radiusYUpdateDirection === 'down') {
       this.radius.y -= iterationTimeDelta * rotationSpeed
 
+      // change this part, we don't want projectile motion
       if (this.radius.y <= 0) {
         this.radius.y = 0
         this.radiusYUpdateDirection = 'up'

@@ -16,7 +16,7 @@ type ISpeed = I2DCoordinates
 /*
  * Direction, in which confetti is moving
  */
-type TConfettiDirection = 'left' | 'right'
+type TConfettiDirection = 'down'
 
 
 /*

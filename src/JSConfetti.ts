@@ -145,23 +145,52 @@ class JSConfetti {
     const canvasWidth = canvasRect.width
     const canvasHeight = canvasRect.height
 
-    const yPosition = canvasHeight * 5 / 7
+    // const yPosition = canvasHeight * 5 / 7
 
-    const leftConfettiPosition: IPosition = {
-      x: 0,
-      y: yPosition,
-    }
-    const rightConfettiPosition: IPosition = {
-      x: canvasWidth,
-      y: yPosition,
+    // const leftConfettiPosition: IPosition = {
+    //   x: 0,
+    //   y: yPosition,
+    // }
+    // const rightConfettiPosition: IPosition = {
+    //   x: canvasWidth,
+    //   y: yPosition,
+    // }
+
+    const initialConfettiPosition: IPosition = {
+      x : canvasHeight,
+      y : canvasHeight
     }
 
     const confettiGroup = new ConfettiBatch(this.canvasContext)
 
     for (let i = 0; i < confettiNumber / 2; i++) {
-      const confettiOnTheRight = new ConfettiShape({
-        initialPosition: leftConfettiPosition,
-        direction: 'right',
+      // const confettiOnTheRight = new ConfettiShape({
+      //   initialPosition: leftConfettiPosition,
+      //   direction: 'right',
+      //   confettiRadius,
+      //   confettiColors,
+      //   confettiNumber,
+      //   emojis,
+      //   emojiSize,
+      //   canvasWidth,
+      // })
+
+      // const confettiOnTheLeft = new ConfettiShape({
+      //   initialPosition: rightConfettiPosition,
+      //   direction: 'left',
+      //   confettiRadius,
+      //   confettiColors,
+      //   confettiNumber,
+      //   emojis,
+      //   emojiSize,
+      //   canvasWidth,
+      // })
+
+      // confettiGroup.addShapes(confettiOnTheRight, confettiOnTheLeft)
+
+      const confettiFromTheAbove = new ConfettiShape({
+        initialPosition: initialConfettiPosition,
+        direction: 'down',
         confettiRadius,
         confettiColors,
         confettiNumber,
@@ -170,18 +199,8 @@ class JSConfetti {
         canvasWidth,
       })
 
-      const confettiOnTheLeft = new ConfettiShape({
-        initialPosition: rightConfettiPosition,
-        direction: 'left',
-        confettiRadius,
-        confettiColors,
-        confettiNumber,
-        emojis,
-        emojiSize,
-        canvasWidth,
-      })
+      confettiGroup.addShapes(confettiFromTheAbove)
 
-      confettiGroup.addShapes(confettiOnTheRight, confettiOnTheLeft)
     }
 
     this.activeConfettiBatches.push(confettiGroup)
