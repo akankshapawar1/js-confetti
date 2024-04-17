@@ -157,8 +157,8 @@ class JSConfetti {
     // }
 
     const initialConfettiPosition: IPosition = {
-      x : canvasHeight,
-      y : canvasHeight
+      x : canvasWidth/2,
+      y : 0
     }
 
     const confettiGroup = new ConfettiBatch(this.canvasContext)
